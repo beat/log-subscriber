@@ -69,9 +69,11 @@ class Formatter
     ) {
         $cache = $customData;
 
+		$that = $this;
+
         return preg_replace_callback(
             '/{\s*([A-Za-z_\-\.0-9]+)\s*}/',
-            function (array $matches) use ($request, $response, $error, &$cache) {
+            function (array $matches) use ($request, $response, $error, &$cache, $that) {
 
                 if (isset($cache[$matches[1]])) {
                     return $cache[$matches[1]];
@@ -89,7 +91,7 @@ class Formatter
                         $result = trim($request->getMethod() . ' '
                             . $request->getResource()) . ' HTTP/'
                             . $request->getProtocolVersion() . "\r\n"
-                            . $this->headers($request);
+                            . $that->headers($request);
                         break;
                     case 'res_headers':
                         $result = $response ?
@@ -98,7 +100,7 @@ class Formatter
                                 $response->getProtocolVersion(),
                                 $response->getStatusCode(),
                                 $response->getReasonPhrase()
-                            ) . "\r\n" . $this->headers($response)
+                            ) . "\r\n" . $that->headers($response)
                             : 'NULL';
                         break;
                     case 'req_body':

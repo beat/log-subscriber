@@ -2,16 +2,18 @@
 
 namespace GuzzleHttp\Subscriber\Log;
 
+use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerTrait;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 /**
  * Simple logger implementation that can write to a function, resource, or
  * uses echo() if nothing is provided.
  */
-class SimpleLogger implements LoggerInterface
+class SimpleLogger extends AbstractLogger implements LoggerInterface
 {
-    use LoggerTrait;
+    //BB as we extend AbstractLogger, no need to use LoggerTrait;
 
     private $writeTo;
 

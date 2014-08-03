@@ -48,11 +48,11 @@ class LogSubscriber implements SubscriberInterface
 
     public function getEvents()
     {
-        return [
+        return array(
             // Fire after responses are verified (which trigger error events).
-            'complete' => ['onComplete', RequestEvents::VERIFY_RESPONSE - 10],
-            'error'    => ['onError', RequestEvents::EARLY]
-        ];
+            'complete' => array('onComplete', RequestEvents::VERIFY_RESPONSE - 10),
+            'error'    => array('onError', RequestEvents::EARLY)
+		);
     }
 
     public function onComplete(CompleteEvent $event)
@@ -64,10 +64,10 @@ class LogSubscriber implements SubscriberInterface
             $this->formatter->format(
                 $event->getRequest(),
                 $event->getResponse()
-            ), [
+            ), array(
                 'request' => $event->getRequest(),
                 'response' => $event->getResponse()
-            ]
+			)
         );
     }
 
@@ -80,11 +80,11 @@ class LogSubscriber implements SubscriberInterface
                 $event->getRequest(),
                 $event->getResponse(),
                 $ex
-            ), [
+            ), array(
                 'request' => $event->getRequest(),
                 'response' => $event->getResponse(),
                 'exception' => $ex
-            ]
+			)
         );
     }
 }
