@@ -21,7 +21,7 @@ class SimpleLogger extends AbstractLogger implements LoggerInterface
         $this->writeTo = $writeTo;
     }
 
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, /** @noinspection PhpUnusedParameterInspection */ array $context = array())
     {
         if (is_resource($this->writeTo)) {
             fwrite($this->writeTo, "[{$level}] {$message}\n");

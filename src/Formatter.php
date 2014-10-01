@@ -68,7 +68,7 @@ class Formatter
         RequestInterface $request,
         ResponseInterface $response = null,
         \Exception $error = null,
-        array $customData = []
+        array $customData = array()
     ) {
         $cache = $customData;
 
